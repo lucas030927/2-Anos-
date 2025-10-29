@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2 Anos de Nós</title>
+
+  <!-- FONTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Slackey&display=swap" rel="stylesheet" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background: linear-gradient(to bottom right, #fff0f5, #ffd6eb);
+      color: #5c005c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    body.dark {
+      background: radial-gradient(circle at top left, #1b0b2d, #2b0948);
+      color: #d9a9e3;
+    }
+
+    h1 {
+      font-family: 'Slackey', cursive;
+      font-size: 2.5em;
+      margin: 50px 0 20px;
+      color: #d1008f;
+      text-shadow: 2px 2px #ffc2e0;
+      animation: fadeIn 2s ease forwards;
+    }
+    body.dark h1 { color: #f2b9f7; text-shadow: 2px 2px #721a72; }
+
+    p {
+      font-size: 1.2em;
+      max-width: 720px;
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .video-container {
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+      margin-bottom: 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    iframe { width: 100%; height: 100%; border: none; }
+
+    footer {
+      font-size: 1em;
+      margin-top: auto;
+      padding: 20px;
+      color: #a00078;
+    }
+
+    #toggle-dark {
+      align-items: center;
+      top: 15px;
+      right: 15px;
+      background: #d1008f;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1000;
+    }
+    body.dark #toggle-dark { background: #f2b9f7; color: #721a72; }
+
+    #music-control {
+      margin: 20px 0 40px;
+      font-size: 1em;
+      background: #d1008f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+    #music-control:hover { background: #b00079; }
+
+    .gallery {
+      max-width: 400px;
+      width: 80%;
+      margin-bottom: 40px;
+      position: relative;
+      border-radius: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: rgb(247, 166, 213);
+      transition: background 0.5s;
+      padding: 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 20px;
+      margin: 0 auto;
+      transition: opacity 0.6s ease;
+    }
+
+    .gallery-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0px;
+      
+    }
+
+    .gallery-buttons button {
+      background: #f80593;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 10px 50px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .countdown {
+      font-size: 1.5em;
+      margin-bottom: 40px;
+      background: #f8c8e3;
+      color: #5c005c;
+      padding: 15px 25px;
+      border-radius: 25px;
+      font-weight: 600;
+      max-width: 320px;
+    }
+
+    #secret-msg {
+      max-width: 720px;
+      background: #ffd0e9;
+      color: #5c005c;
+      padding: 20px;
+      border-radius: 20px;
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    #reveal-btn {
+      background: #d1008f;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-bottom: 40px;
+    }
+
+    /* Corações flutuantes */
+    .heart {
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+      animation: floatHeart 6s linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+      filter: drop-shadow(0 0 5px rgba(255,0,100,0.5));
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.4) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="toggle-dark">Modo Escuro</button>
+
+  <button id="music-control">▶️ Tocar Música</button>
+
+  <h1>Feliz 2 Anos, Meu Amor 💖</h1>
+
+  <p>Fazem 2 anos desde que nossa história começou.<br>Vivemos tantos momentos incríveis e inesquecíveis, altos e baixos que só nós dois sabemos.<br>Obrigado por me mostrar o que é amor verdadeiro e por ser minha melhor amiga e companheira.<br>Que venham muitos mais aniversários ao seu lado!<br><br> Eu te amo mais que tudo nessa vida, minha princesa 💕</p>
+
+  <div class="countdown" id="countdown">Carregando contagem regressiva...</div>
+
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID_AQUI" allowfullscreen></iframe>
+  </div>
+
+  <div class="gallery">
+    <img id="gallery-img" src="foto1.jpg.jpg" alt="Foto 1" />
+    <div class="gallery-buttons">
+      <button id="prev-btn"><img src="seta esquerda.png" alt="seta esquerda"></button>
+      <button id="next-btn"><img src="seta direita.png" alt="seta direita"></button>
+    </div>
+  </div>
+  
+
+  <button id="reveal-btn">Clique para revelar uma mensagem secreta 💌</button>
+  <div id="secret-msg">
+    Hoje, dia 03/11/2025, completamos 2 anos juntos, 2 anos onde vivenciamos muita coisa, vivenciamos momentos incríveis que sinto muita falta.. 
+    Só me lembro do começo, onde notei você na minha sala e já me apaixonei no mesmo instante, só pelo seu jeito e personalidade mexeu com minha cabeça, 
+    você tinha algo diferente, onde todas as outras não têm. Não sabia como me aproximar de você e só deixei acontecer naturalmente, fomos nos aproximando 
+    com as brincadeiras do bom prato, e depois de um bom tempo consegui seu Instagram, mandei mensagem continuando um assunto que tínhamos conversado na sala 
+    e fomos nos aproximando mais ainda, até quando você sentou comigo na mesa e me abraçou por trás, ali encontrei minha paz, me senti nas nuvens.. Depois disso,
+     todos ficavam nos shipando e só fui acreditando mais ainda em nós, eu sabia que iria valer a pena tentar algo com você, e fomos deixando o tempo nos levar. 
+     Peguei seu WhatsApp e fomos nos conhecendo melhor, fazendo brincadeiras de perguntas, conversando sobre o dia a dia e fomos nos desenvolvendo.. Começamos a pegar o 
+     mesmo ônibus e ir embora juntos e, naquela época, eu já não via a hora de te beijar, mas você nunca cedia, até o dia em que fomos nos despedir e te dei um selinho 
+     inesperado e, sinceramente, foi a MELHOR COISA DA MINHA VIDA! Eu saí tão feliz, saí com um sorriso de orelha a orelha e ali me apaixonei completamente por você. 
+     Eu já estava decidido que era você que queria pra minha vida, não queria ninguém além de você. Lembro que saía com o Paulo e só falava de você, do quanto estava apaixonado 
+     por você, e pedia conselhos pra ele, perguntando se estava sendo emocionado, se estava muito cedo pelo pouco tempo em que nos conhecemos e de como iria te pedir em namoro..
+      No dia 02/11/2023, fiz um texto te pedindo em namoro, e não sabia se mandava ou não. Fui atrás do Paulo e perguntei se estava bom ou não. Ele falou que estava bom e que eu tinha que fazer o que o meu coração queria..
+       E foi dali que veio minha coragem de te pedir em namoro, mesmo com muito medo de você recusar, até mesmo porque você era tudo que eu queria. E no dia 03/11/2023, às 00:22, 
+       te pedi em namoro. Larguei o celular e fui tomar uma água, não querendo ver o que você tinha me respondido. Quando voltei, ainda muito nervoso, você me respondeu com uma
+        figurinha do Felca e um "calma, travei", ali eu já queria chorar, mas logo em seguida você aceitou. Fiquei taoooo feliz que já queria pôr bio em tudo, foto no perfil e um
+         monte de coisa.. Nesse meio tempo, inclusive depois de muito tempo que nós nos conhecíamos, a gente saiu pela primeira vez, fomos no shopping assistir a um filme de 
+         terror com nossa velinha. Esse dia foi tão bom.. Mas não tão bom quanto a segunda vez, quando fomos sozinhos ao cinema. Nesse dia saiu o nosso primeiro beijo e foi 
+         PERFEITOO, era como mais um sonho realizado.. Ainda nesse dia, tivemos que sair correndo e o Uber saiu igual um doido, achando que era emergência. Esse dia foi tão bom..
+          Depois disso, foi a guerra pra convencer a sua vó a deixar nós namorar. Você não tinha coragem de pedir e nem de me apresentar, isso me dava um grande desânimo, 
+          mas nunca desisti, pois tinha fé que um dia iria dar certo, e por você eu fui muito persistente e paciente, pois você era tudo que eu sonhava. E no dia 12/06/2024, 
+          no Dia dos Namorados, eu comprei uma aliança e um buquê pra você, te dei o buquê e no shopping a aliança, morrendo de vergonha, mas consegui, e depois disso fomos embora
+           com a intenção de conversar com sua vó sobre nós. Quando chegamos na sua rua, ela nos encontrou, parou no meio da rua e subiu, ela me cumprimentou e 
+           começamos a conversar. Ela ficou insistindo em querer aceitar a nós namorar quando você completasse 18 anos, e já fiquei desanimado, mas, ainda assim, continuei 
+           insistindo, até que ela falou que iria pensar. Quando cheguei em casa, me deparei com um áudio seu falando que ela DEIXOUUU E SEU PAI CAGUETOUU QUE NÓS TINHA IDO PRA LÁ
+           , e quando ouvi esse áudio, PQPP FIQUEIII TAOO FELIZZ!! Depois conheci sua vó e as coisas começaram a andar.. <br> <br> Só tenho a te agradecer por todos os momentos que você tem me proporcionado, por todos os conselhos, por estar comigo todos os dias, 
+           sempre me motivando a fazer tudo que gosto. Não vejo a hora de conquistarmos tudo que sonhamos: nosso apartamento, nosso goldenzinho, nossos filhos e nosso lancerzão. 
+          Não vejo a hora de morar com a mulher da minha vida, acordar todos os dias com a pessoa que mais amo nessa vida. Obrigado por me proporcionar tudo isso. <br> <br> 
+    EU TE AMOOO MUITOOOOOOO, VOCÊ SEMPRE VAI SER MINHA GAROTA! 💞
+  </div>
+
+  <footer>Feito com todo o meu amor por você 💌</footer>
+
+  <script>
+    // 🌙 Modo escuro
+    const toggleDarkBtn = document.getElementById('toggle-dark');
+    toggleDarkBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleDarkBtn.textContent = document.body.classList.contains('dark') ? 'Modo Claro' : 'Modo Escuro';
+    });
+
+    // 🎵 Duas músicas em sequência
+    const music1 = new Audio('ingles.mp3');
+    const music2 = new Audio('ingles2.mp3');
+    const musicBtn = document.getElementById('music-control');
+    let currentMusic = null;
+
+    musicBtn.addEventListener('click', () => {
+      if (!currentMusic) {
+        currentMusic = music1;
+        currentMusic.volume = 0;
+        currentMusic.play();
+        let fade = setInterval(() => {
+          if (currentMusic.volume < 1) currentMusic.volume += 0.05;
+          else clearInterval(fade);
+        }, 200);
+        musicBtn.textContent = '⏸️ Pausar Música';
+      } else if (currentMusic.paused) {
+        currentMusic.play();
+        musicBtn.textContent = '⏸️ Pausar Música';
+      } else {
+        currentMusic.pause();
+        musicBtn.textContent = '▶️ Tocar Música';
+      }
+    });
+
+    // Quando a primeira acabar, toca a segunda
+    music1.addEventListener('ended', () => {
+      currentMusic = music2;
+      music2.play();
+    });
+
+    // ⏳ Contagem regressiva
+    const countdownEl = document.getElementById('countdown');
+    const anniversaryDate = new Date('2025-11-03T00:00:00');
+    function updateCountdown(){
+      const now = new Date();
+      const diff = anniversaryDate - now;
+      if(diff <= 0){ countdownEl.textContent = 'Hoje é nosso aniversário! ❤️'; return; }
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      countdownEl.textContent = `Faltam ${d} dias, ${h}h, ${m}m e ${s}s 💞`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 🖼️ Galeria
+    const images = [
+      { src: 'foto1.jpg.jpg', alt: 'Foto 1' },
+      { src: 'foto2.jpg.jpg', alt: 'Foto 2' },
+      { src: 'foto3.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto4.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto5.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto6.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto7.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto8.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto9.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto10.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto11.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto12.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto13.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto14.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto15.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto16.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto17.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto18.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto19.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto20.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto21.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto22.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto23.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto24.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto25.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto26.jpg.jpg', alt: 'Foto 3' },
+      { src: 'foto27.jpg.jpg', alt: 'Foto 3' }
+
+    ];
+    let currentIndex = 0;
+    const galleryImg = document.getElementById('gallery-img');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function showImage(i) {
+      galleryImg.style.opacity = 0;
+      setTimeout(() => {
+        galleryImg.src = images[i].src;
+        galleryImg.alt = images[i].alt;
+        galleryImg.style.opacity = 1;
+      }, 300);
+    }
+
+    prevBtn.onclick = () => { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(currentIndex); };
+    nextBtn.onclick = () => { currentIndex = (currentIndex + 1) % images.length; showImage(currentIndex); };
+    showImage(currentIndex);
+
+    // 💌 Mensagem secreta
+    const revealBtn = document.getElementById('reveal-btn');
+    const secretMsg = document.getElementById('secret-msg');
+    revealBtn.onclick = () => {
+      secretMsg.style.display = (secretMsg.style.display === 'block') ? 'none' : 'block';
+    };
+
+    // 💕 Corações flutuantes
+    function createHeart(){
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      heart.style.width = heart.style.height = (Math.random() * 15 + 15) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
